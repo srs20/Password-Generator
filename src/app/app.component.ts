@@ -6,8 +6,28 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'pw';
+  password = '';
+  passwordLength = 0;
+  includeLetters = true;
+  includeNumbers = true;
+  includeSymbols = true;
+
+  onChangeUseLetters() {
+    this.includeLetters = !this.includeLetters;
+  }
+
+  onChangeUseNumbers() {
+    this.includeNumbers = !this.includeNumbers;
+  }
+
+  onChangeUseSymbols() {
+    this.includeSymbols = !this.includeSymbols;
+  }
+
+  onButtonClick() {
+    this.password = 'My Password';
+  }
 }
