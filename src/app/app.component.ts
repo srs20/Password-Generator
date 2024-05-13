@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,13 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   password = '';
   passwordLength = 0;
-  includeLetters = true;
-  includeNumbers = true;
-  includeSymbols = true;
+  includeLetters = false;
+  includeNumbers = false;
+  includeSymbols = false;
+
+  onChangeLength(value: number) {
+    this.passwordLength = value;
+  }
 
   onChangeUseLetters() {
     this.includeLetters = !this.includeLetters;
@@ -28,6 +33,28 @@ export class AppComponent {
   }
 
   onButtonClick() {
-    this.password = 'My Password';
+    const numbers = '1234567890';
+    const letters = 'abcdefghijklmnopqrstuvwxyz';
+    const symbols = '!@#$%^&*()';
+
+    let validChars = '';
+    if (this.includeLetters) {
+      validChars += letters;
+    }
+    if (this.includeNumbers) {
+      validChars += numbers;
+    }
+    if (this.includeSymbols) {
+      validChars += symbols;
+    }
+
+    let generatedPassword = '';
+
+    for (let i = 0; i < this.passwordLength; i++) {
+      const index = Math.floor(Math.random() * validChars.length);
+      generatedPassword += validChars[index];
+    }
+
+    this.password = generatedPassword;
   }
 }
